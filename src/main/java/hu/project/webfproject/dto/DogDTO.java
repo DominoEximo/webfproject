@@ -10,15 +10,54 @@ import java.io.Serializable;
 @Data
 public class DogDTO implements Serializable {
 
-    private Long id;
+    private Long dogDtoId;
 
-    private String name;
+    private String dogName;
 
-    private Character gender;
+    private Character dogGender;
 
-    private String breed;
+    private String dogBreed;
 
-    private OwnerDTO owner;
+    private Owner dogOwner;
 
 
+    public Long getDogDtoId() {
+        return dogDtoId;
+    }
+
+    public void setDogDtoId(Long dogId) {
+        this.dogDtoId = dogId;
+    }
+
+    public String getDogName() {
+        return dogName;
+    }
+
+    public void setDogName(String dogName) {
+        this.dogName = dogName;
+    }
+
+    public Character getDogGender() {
+        return dogGender;
+    }
+
+    public void setDogGender(Character dogGender) {
+        this.dogGender = dogGender;
+    }
+
+    public String getDogBreed() {
+        return dogBreed;
+    }
+
+    public void setDogBreed(String dogBreed) {
+        this.dogBreed = dogBreed;
+    }
+
+    public Owner getDogOwner() {
+        return dogOwner;
+    }
+
+    public void setDogOwner(Owner dogOwner) {
+        this.dogOwner = dogOwner;
+    }
 }

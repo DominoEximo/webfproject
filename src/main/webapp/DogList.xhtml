@@ -15,7 +15,51 @@
                 <p:menuitem value="Owners" url="http://localhost:9090/pets/welcome.jsf"/>
                 <p:menuitem value="Website" url="http://www.primefaces.org" icon="pi pi-external-link"/>
             </p:menuButton>
+            <p:panel header="Dog Info" id="dogInfoPnl">
+                <h:panelGrid columns="2">
+                    <p:outputLabel for="name" value="Dog Name: "/>
+                    <p:inputText id="name" size="40"
+                                 value="#{dogController.dogDTO.dogName}" required="true"
+                                 requiredMessage="Please enter dog name! "/>
+                    <p:outputLabel for="breed" value="Dog Breed: "/>
+                    <p:inputText id="breed" size="40"
+                                 value="#{dogController.dogDTO.dogBreed}" required="true"
+                                 requiredMessage="Please enter dog name! "/>
+                    <p:outputLabel for="gender" value="Dog Gender: "/>
+                    <p:inputText id="gender" size="40"
+                                 value="#{dogController.dogDTO.dogGender}" required="true"
+                                 requiredMessage="Please enter dog name! "/>
 
+                    <p:commandButton value="#{dogController.actionLabel}"
+                                     action="#{dogController.saveDog()}" update="dogList dogInfoPnl">
+                    </p:commandButton>
+
+                </h:panelGrid>
+            </p:panel>
+            <p:panel header="Department List" id="dogList">
+                <p:dataTable id="table" var="dog" value="#{dogController.dogs}">
+
+                    <p:column headerText="Breed">
+                        <h:outputText value="#{dog.dogBreed}"/>
+                    </p:column>
+
+                    <p:column headerText="Name">
+                        <h:outputText value="#{dog.dogName}"/>
+                    </p:column>
+                    <p:column id="action">
+                        <f:facet name="header">Action</f:facet>
+                        <h:commandLink value="Edit"
+                                       action="#{dogController.deleteDog(dog)}">
+                            <f:ajax execute="action" render="dogForm"/>
+                        </h:commandLink> /
+                        <h:commandLink value="Delete"
+                                       action="#{dogController.deleteDog(dog)}">
+                            <f:ajax execute="action" render="table"/>
+                        </h:commandLink>
+                    </p:column>
+                </p:dataTable>
+
+            </p:panel>
 
         </h:form>
     </ui:define>

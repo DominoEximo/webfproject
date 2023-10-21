@@ -14,22 +14,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@Data
 public class DogController {
 
     @Autowired
-    DogService dogService;
+    private DogService dogService;
 
     @Autowired
-    DogMapper dogMapper;
+    private DogMapper dogMapper;
 
-    List<DogDTO> dogs;
+    private String actionLabel;
 
-    List<OwnerDTO> owners;
+    private List<DogDTO> dogs;
 
-    DogDTO dogDTO;
+    private List<OwnerDTO> owners;
 
-    OwnerDTO ownerDTO;
+    private DogDTO dogDTO;
+
+    private OwnerDTO ownerDTO;
 
 
     @PostConstruct
@@ -39,13 +40,86 @@ public class DogController {
             this.getOwners().clear();
         }
         this.getDogs().addAll(dogService.getAllDogs());
-    }
-    public List<DogDTO> getDogs(){
-        return null;
+        this.setActionLabel("Add");
     }
 
-    public void saveDog(DogDTO dogDTO){
-        dogService.saveDog(dogDTO);
+    public void saveDog(){
+
+        dogService.saveDog(this.dogDTO);
+        getAllDogs();
+    }
+
+    public void deleteDog(DogDTO tobeDeleted){
+        dogService.deleteDog(tobeDeleted);
+        getAllDogs();
+    }
+
+    public DogService getDogService() {
+        return dogService;
+    }
+
+    public void setDogService(DogService dogService) {
+        this.dogService = dogService;
+    }
+
+    public DogMapper getDogMapper() {
+        return dogMapper;
+    }
+
+    public void setDogMapper(DogMapper dogMapper) {
+        this.dogMapper = dogMapper;
+    }
+
+    public List<DogDTO> getDogs(){
+        if(null == dogs){
+            dogs = new ArrayList<DogDTO>();
+        }
+        return dogs;
+    }
+
+    public List<OwnerDTO> getOwners(){
+        if(null == owners){
+            owners = new ArrayList<OwnerDTO>();
+        }
+        return owners;
+    }
+
+    public String getActionLabel() {
+        return actionLabel;
+    }
+
+    public void setActionLabel(String actionLabel) {
+        this.actionLabel = actionLabel;
+    }
+
+    public void setDogs(List<DogDTO> dogs) {
+        this.dogs = dogs;
+    }
+
+    public void setOwners(List<OwnerDTO> owners) {
+        this.owners = owners;
+    }
+
+    public DogDTO getDogDTO() {
+        if (null == dogDTO){
+            dogDTO = new DogDTO();
+        }
+        return dogDTO;
+    }
+
+    public void setDogDTO(DogDTO dogDTO) {
+        this.dogDTO = dogDTO;
+    }
+
+    public OwnerDTO getOwnerDTO() {
+        if (null == ownerDTO){
+            ownerDTO = new OwnerDTO();
+        }
+        return ownerDTO;
+    }
+
+    public void setOwnerDTO(OwnerDTO ownerDTO) {
+        this.ownerDTO = ownerDTO;
     }
 
 }

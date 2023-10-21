@@ -5,6 +5,7 @@ import hu.project.webfproject.entities.Dog;
 import hu.project.webfproject.repository.DogRepository;
 import hu.project.webfproject.service.DogService;
 import hu.project.webfproject.utils.DogMapper;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,6 +39,6 @@ public class DogServiceImpl implements DogService {
 
     @Override
     public void deleteDog(DogDTO dog) {
-        dogRepository.deleteById(dog.getId());
+        dogRepository.deleteById(dog.getDogDtoId());
     }
 }
