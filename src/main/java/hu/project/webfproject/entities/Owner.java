@@ -3,6 +3,8 @@ package hu.project.webfproject.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Entity
 @Data
 public class Owner {
@@ -19,4 +21,8 @@ public class Owner {
 
     @Column(name = "AGE")
     private Integer age;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "DOG_ID")
+    private List<Dog> dogs;
 }
