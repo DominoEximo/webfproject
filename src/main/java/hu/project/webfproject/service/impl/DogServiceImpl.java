@@ -16,16 +16,16 @@ public class DogServiceImpl implements DogService {
 
     @Override
     public List<Dog> getAllDogs() {
-        return null;
+        return dogRepository.findAll();
     }
 
     @Override
-    public void saveDog() {
-
+    public void saveDog(Dog dog) {
+        dogRepository.save(dog);
     }
 
     @Override
-    public void deleteDog() {
-
+    public void deleteDog(Dog dog) {
+        dogRepository.delete(dog);
     }
 }

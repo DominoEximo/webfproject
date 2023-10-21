@@ -8,9 +8,9 @@ public interface OwnerService {
 
     List<Owner> getAllOwners();
 
-    void saveOwner();
+    void saveOwner(Owner owner);
 
-    void deleteOwner();
+    void deleteOwner(Owner owner);
 
 
 }
