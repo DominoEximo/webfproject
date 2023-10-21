@@ -7,10 +7,12 @@ import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface DogMapper {
 
     DogMapper INSTANCE = Mappers.getMapper(DogMapper.class);
+
+
     DogDTO DogtoDogDto(Dog dog);
 
     Dog DogDtoToDog(DogDTO dogDto);
