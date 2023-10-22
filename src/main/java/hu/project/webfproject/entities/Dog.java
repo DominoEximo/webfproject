@@ -19,7 +19,7 @@ public class Dog {
     @Column(name = "BREED")
     private String breed;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "OWNER_ID")
     private Owner owner;
 

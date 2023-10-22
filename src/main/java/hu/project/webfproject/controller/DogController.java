@@ -3,8 +3,10 @@ package hu.project.webfproject.controller;
 import hu.project.webfproject.dto.DogDTO;
 import hu.project.webfproject.dto.OwnerDTO;
 import hu.project.webfproject.entities.Dog;
+import hu.project.webfproject.entities.Owner;
 import hu.project.webfproject.service.DogService;
 import hu.project.webfproject.utils.DogMapper;
+import hu.project.webfproject.utils.OwnerMapper;
 import jakarta.annotation.PostConstruct;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,9 @@ public class DogController {
 
     @Autowired
     private DogMapper dogMapper;
+
+    @Autowired
+    private OwnerMapper ownerMapper;
 
     private String actionLabel;
 
@@ -44,7 +49,8 @@ public class DogController {
     }
 
     public void saveDog(){
-
+        Owner newOwner = ownerMapper.OwnerDtoToOwner(this.ownerDTO);
+        dogDTO.setDogOwner(newOwner);
         dogService.saveDog(this.dogDTO);
         getAllDogs();
     }
@@ -52,6 +58,10 @@ public class DogController {
     public void deleteDog(DogDTO tobeDeleted){
         dogService.deleteDog(tobeDeleted);
         getAllDogs();
+    }
+
+    public void updateDog(DogDTO toBeUpdated){
+
     }
 
     public DogService getDogService() {
@@ -103,6 +113,7 @@ public class DogController {
     public DogDTO getDogDTO() {
         if (null == dogDTO){
             dogDTO = new DogDTO();
+
         }
         return dogDTO;
     }
