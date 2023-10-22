@@ -46,6 +46,8 @@ public class DogController {
         }
         this.getDogs().addAll(dogService.getAllDogs());
         this.setActionLabel("Add");
+        getDogDTO();
+        this.dogDTO.setDogDtoId(null);
     }
 
     public void saveDog(){
@@ -61,7 +63,12 @@ public class DogController {
     }
 
     public void updateDog(DogDTO toBeUpdated){
-
+        setActionLabel("Update");
+        dogDTO.setDogDtoId(toBeUpdated.getDogDtoId());
+        dogDTO.setDogBreed(toBeUpdated.getDogBreed());
+        dogDTO.setDogGender(toBeUpdated.getDogGender());
+        dogDTO.setDogName(toBeUpdated.getDogName());
+        dogDTO.setDogOwner(toBeUpdated.getDogOwner());
     }
 
     public DogService getDogService() {

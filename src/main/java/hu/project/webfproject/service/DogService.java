@@ -14,5 +14,5 @@ public interface DogService {
 
     void deleteDog(DogDTO dog);
 
-    void updateDog(DogDTO dog);
+
 }
