@@ -22,8 +22,7 @@ public class Owner {
     @Column(name = "AGE")
     private Integer age;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "DOG_ID")
+    @OneToMany(mappedBy="owner")
     private List<Dog> dogs;
 
     public Long getId() {

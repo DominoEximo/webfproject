@@ -7,6 +7,7 @@ import hu.project.webfproject.service.DogService;
 import hu.project.webfproject.utils.DogMapper;
 import hu.project.webfproject.utils.OwnerMapper;
 import jakarta.annotation.PostConstruct;
+import jakarta.faces.view.ViewScoped;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
+@ViewScoped
 public class DogController {
 
     @Autowired

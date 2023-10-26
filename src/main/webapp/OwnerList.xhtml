@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:sec="http://www.springframework.org/security/tags">
+<ui:composition template="layout.xhtml">
+    <ui:define name="content">
+        <h:form id="ownerForm">
+            <p:menuButton value="Navigation">
+                <p:menuitem value="Dogs" url="http://localhost:9090/pets/DogList.jsf"/>
+                <p:menuitem value="Owners" url="http://localhost:9090/pets/OwnerList.jsf"/>
+                <p:menuitem value="Website" url="http://www.primefaces.org" icon="pi pi-external-link"/>
+            </p:menuButton>
+            <p:panel header="Owner Info" id="ownerInfoPnl">
+                <h:panelGrid columns="2">
+                    <p:outputLabel for="name" value="Owner Name: "/>
+                    <p:inputText id="name" size="40"
+                                 value="#{ownerController.currentOwner.name}" required="true"
+                                 requiredMessage="Please enter owner name! "/>
+                    <p:outputLabel for="breed" value="Owner Age: "/>
+                    <p:inputText id="breed" size="40"
+                                 value="#{ownerController.currentOwner.age}" required="true"
+                                 requiredMessage="Please enter owner age! "/>
+                    <p:outputLabel for="gender" value="Owner Gender: "/>
+                    <p:inputText id="gender" size="40"
+                                 value="#{ownerController.currentOwner.gender}" required="true"
+                                 requiredMessage="Please enter gender of owner! "/>
+
+
+                    <p:commandButton value="#{ownerController.actionLabel}"
+                                     action="#{ownerController.saveOwner()}" update="ownerList ownerInfoPnl">
+                    </p:commandButton>
+
+                </h:panelGrid>
+            </p:panel>
+            <p:panel header="Owner List" id="ownerList">
+                <p:dataTable id="table" var="owner" value="#{ownerController.owners}">
+
+                    <p:column headerText="ID">
+                        <h:outputText value="#{owner.id}"/>
+                    </p:column>
+
+                    <p:column headerText="Name">
+                        <h:outputText value="#{owner.name}"/>
+                    </p:column>
+                    <p:column headerText="Dogs">
+                        <h:outputText value="#{ownerController.convertDogsToDogNames(owner.dogs)}"/>
+                    </p:column>
+                    <p:column id="action">
+                        <f:facet name="header">Action</f:facet>
+                        <h:commandLink value="Edit"
+                                       action="#{ownerController.updateOwner(owner)}">
+                            <f:ajax execute="action" render="ownerForm"/>
+                        </h:commandLink> /
+                        <h:commandLink value="Delete"
+                                       action="#{ownerController.deleteOwner(owner)}">
+                            <f:ajax execute="action" render="table"/>
+                        </h:commandLink>
+                    </p:column>
+                </p:dataTable>
+
+            </p:panel>
+
+        </h:form>
+    </ui:define>
+</ui:composition>
+</html>
