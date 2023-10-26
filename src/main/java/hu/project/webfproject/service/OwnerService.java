@@ -1,16 +1,17 @@
 package hu.project.webfproject.service;
 
+import hu.project.webfproject.dto.OwnerDTO;
 import hu.project.webfproject.entities.Owner;
 
 import java.util.List;
 
 public interface OwnerService {
 
-    List<Owner> getAllOwners();
+    List<OwnerDTO> getAllOwners();
 
-    void saveOwner(Owner owner);
+    void saveOwner(OwnerDTO owner);
 
-    void deleteOwner(Owner owner);
+    void deleteOwner(OwnerDTO owner);
 
 
 }

@@ -1,5 +1,6 @@
 package hu.project.webfproject.dto;
 
+import hu.project.webfproject.entities.Dog;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -16,7 +17,7 @@ public class OwnerDTO implements Serializable {
 
     private Integer age;
 
-    private List<DogDTO> dogs;
+    private List<Dog> dogs;
 
     public Long getId() {
         return id;
@@ -50,11 +51,11 @@ public class OwnerDTO implements Serializable {
         this.age = age;
     }
 
-    public List<DogDTO> getDogs() {
+    public List<Dog> getDogs() {
         return dogs;
     }
 
-    public void setDogs(List<DogDTO> dogs) {
+    public void setDogs(List<Dog> dogs) {
         this.dogs = dogs;
     }
 }

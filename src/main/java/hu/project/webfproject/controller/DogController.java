@@ -2,13 +2,11 @@ package hu.project.webfproject.controller;
 
 import hu.project.webfproject.dto.DogDTO;
 import hu.project.webfproject.dto.OwnerDTO;
-import hu.project.webfproject.entities.Dog;
 import hu.project.webfproject.entities.Owner;
 import hu.project.webfproject.service.DogService;
 import hu.project.webfproject.utils.DogMapper;
 import hu.project.webfproject.utils.OwnerMapper;
 import jakarta.annotation.PostConstruct;
-import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
