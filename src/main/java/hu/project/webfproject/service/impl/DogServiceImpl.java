@@ -42,27 +42,31 @@ public class DogServiceImpl implements DogService {
     }
 
     @Override
-    public void saveDog(DogDTO dog) {
-        Optional<Owner> tempOwner = ownerRepository.findById(dog.getDogOwner().getId());
-        if(dog.getDogDtoId() == null){
-            Dog newDog = dogMapper.DogDtoToDog(dog);
+    public void saveDog(DogDTO dogToBeSaved) {
+        Optional<Owner> tempOwner = ownerRepository.findById(dogToBeSaved.getDogOwner().getId());
+        if(dogToBeSaved.getDogDtoId() == null){
+            Dog newDog = dogMapper.DogDtoToDog(dogToBeSaved);
             if(tempOwner.isPresent()){
                 Owner owner = tempOwner.get();
                 newDog.setOwner(owner);
                 dogRepository.save(newDog);
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, String.format("Owner notice %s",dogToBeSaved.getDogDtoId() ), "Succesfully added new Dog!");
+                PrimeFaces.current().dialog().showMessageDynamic(message);
             }else{
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Owner notice", "Owner with the given ID does not exist!");
                 PrimeFaces.current().dialog().showMessageDynamic(message);
             }
         }else{
-            Optional<Dog> doggo = dogRepository.findById(dog.getDogDtoId());
+            Optional<Dog> doggo = dogRepository.findById(dogToBeSaved.getDogDtoId());
             Dog existingDog = doggo.get();
             if(tempOwner.isPresent()){
-                existingDog.setOwner(dog.getDogOwner());
-                existingDog.setName(dog.getDogName());
-                existingDog.setBreed(dog.getDogBreed());
-                existingDog.setGender(dog.getDogGender());
+                existingDog.setOwner(dogToBeSaved.getDogOwner());
+                existingDog.setName(dogToBeSaved.getDogName());
+                existingDog.setBreed(dogToBeSaved.getDogBreed());
+                existingDog.setGender(dogToBeSaved.getDogGender());
                 dogRepository.save(existingDog);
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Owner notice", "Updated existing dog!");
+                PrimeFaces.current().dialog().showMessageDynamic(message);
             }else{
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Owner notice", "Owner with the given ID does not exist!");
                 PrimeFaces.current().dialog().showMessageDynamic(message);

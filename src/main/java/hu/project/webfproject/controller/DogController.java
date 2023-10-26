@@ -7,15 +7,15 @@ import hu.project.webfproject.service.DogService;
 import hu.project.webfproject.utils.DogMapper;
 import hu.project.webfproject.utils.OwnerMapper;
 import jakarta.annotation.PostConstruct;
-import jakarta.faces.view.ViewScoped;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.context.annotation.SessionScope;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@ViewScoped
+@SessionScope
 public class DogController {
 
     @Autowired
@@ -48,12 +48,11 @@ public class DogController {
         this.setActionLabel("Add");
         getDogDTO();
         this.dogDTO.setDogDtoId(null);
+
     }
 
     public void saveDog(){
-        Owner newOwner = ownerMapper.OwnerDtoToOwner(this.ownerDTO);
-        dogDTO.setDogOwner(newOwner);
-        dogService.saveDog(this.dogDTO);
+        dogService.saveDog(this.getDogDTO());
         getAllDogs();
     }
 
@@ -63,12 +62,13 @@ public class DogController {
     }
 
     public void updateDog(DogDTO toBeUpdated){
+
+        this.dogDTO.setDogDtoId(toBeUpdated.getDogDtoId());
+        this.dogDTO.setDogBreed(toBeUpdated.getDogBreed());
+        this.dogDTO.setDogGender(toBeUpdated.getDogGender());
+        this.dogDTO.setDogName(toBeUpdated.getDogName());
+        this.dogDTO.setDogOwner(toBeUpdated.getDogOwner());
         setActionLabel("Update");
-        dogDTO.setDogDtoId(toBeUpdated.getDogDtoId());
-        dogDTO.setDogBreed(toBeUpdated.getDogBreed());
-        dogDTO.setDogGender(toBeUpdated.getDogGender());
-        dogDTO.setDogName(toBeUpdated.getDogName());
-        dogDTO.setDogOwner(toBeUpdated.getDogOwner());
     }
 
     public DogService getDogService() {
@@ -120,7 +120,7 @@ public class DogController {
     public DogDTO getDogDTO() {
         if (null == dogDTO){
             dogDTO = new DogDTO();
-
+            dogDTO.setDogOwner(new Owner());
         }
         return dogDTO;
     }

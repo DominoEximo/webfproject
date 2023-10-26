@@ -1,34 +1,33 @@
 package hu.project.webfproject.controller;
 
-import hu.project.webfproject.dto.DogDTO;
 import hu.project.webfproject.dto.OwnerDTO;
 import hu.project.webfproject.entities.Dog;
 import hu.project.webfproject.service.OwnerService;
 import jakarta.annotation.PostConstruct;
-import jakarta.faces.view.ViewScoped;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.context.annotation.SessionScope;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
-@ViewScoped
+@SessionScope
 public class OwnerController {
 
     @Autowired
-    OwnerService ownerService;
+    private OwnerService ownerService;
 
-    List<OwnerDTO> owners;
+    private List<OwnerDTO> owners;
 
-    OwnerDTO currentOwner;
+    private OwnerDTO currentOwner;
 
     private String actionLabel;
 
     @PostConstruct
     public void getAllOwners(){
-        if (this.getOwners().isEmpty()){
+        if (!this.getOwners().isEmpty()){
             this.getOwners().clear();
         }
         this.getOwners().addAll(ownerService.getAllOwners());
@@ -38,11 +37,14 @@ public class OwnerController {
     }
 
     public void saveOwner(){
-        //TODO
+        ownerService.saveOwner(this.currentOwner);
+        getAllOwners();
     }
 
     public void deleteOwner(OwnerDTO ownerDTO){
-        //TODO
+        ownerService.deleteOwner(ownerDTO);
+        owners.clear();
+        getAllOwners();
     }
 
     public void updateOwner(OwnerDTO ownerDTO){

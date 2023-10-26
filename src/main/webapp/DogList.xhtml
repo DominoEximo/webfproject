@@ -5,8 +5,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:sec="http://www.springframework.org/security/tags">
+      xmlns:p="http://primefaces.org/ui">
 <ui:composition template="layout.xhtml">
     <ui:define name="content">
         <h:form id="dogForm">
@@ -17,6 +16,10 @@
             </p:menuButton>
             <p:panel header="Dog Info" id="dogInfoPnl">
                 <h:panelGrid columns="2">
+                    <p:outputLabel for="id" value="Dog ID: "/>
+                    <p:inputText id="id" size="40"
+                                 value="#{dogController.dogDTO.dogDtoId}" required="false"
+                                 requiredMessage="Please enter dog name! "/>
                     <p:outputLabel for="name" value="Dog Name: "/>
                     <p:inputText id="name" size="40"
                                  value="#{dogController.dogDTO.dogName}" required="true"
@@ -31,7 +34,7 @@
                                  requiredMessage="Please enter dog name! "/>
                     <p:outputLabel for="owner" value="ID of Owner: "/>
                     <p:inputText id="owner" size="40"
-                                 value="#{dogController.ownerDTO.id}" required="true"
+                                 value="#{dogController.dogDTO.dogOwner.id}" required="true"
                                  requiredMessage="Please enter dog owner! "/>
 
                     <p:commandButton value="#{dogController.actionLabel}"
