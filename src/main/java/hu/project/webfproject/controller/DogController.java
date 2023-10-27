@@ -9,13 +9,13 @@ import hu.project.webfproject.utils.OwnerMapper;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.context.annotation.SessionScope;
+import org.springframework.web.context.annotation.RequestScope;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@SessionScope
+@RequestScope
 public class DogController {
 
     @Autowired

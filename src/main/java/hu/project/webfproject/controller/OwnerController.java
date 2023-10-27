@@ -6,14 +6,14 @@ import hu.project.webfproject.service.OwnerService;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.context.annotation.SessionScope;
+import org.springframework.web.context.annotation.RequestScope;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
-@SessionScope
+@RequestScope
 public class OwnerController {
 
     @Autowired
@@ -57,7 +57,18 @@ public class OwnerController {
     }
 
     public List<String> convertDogsToDogNames(List<Dog> dogs){
-        return dogs.stream().map(dog -> dog.getName()).collect(Collectors.toList());
+        if(dogs != null){
+            return dogs.stream().map(dog -> dog.getName()).collect(Collectors.toList());
+        }
+        return new ArrayList<String>();
+
+    }
+
+    public List<Long> convertOwnersToNames(List<OwnerDTO> owners){
+        if(owners != null){
+            return owners.stream().map(owner -> owner.getId()).collect(Collectors.toList());
+        }
+        return new ArrayList<Long>();
     }
 
     public List<OwnerDTO> getOwners() {

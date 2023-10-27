@@ -32,10 +32,11 @@
                     <p:inputText id="gender" size="40"
                                  value="#{dogController.dogDTO.dogGender}" required="true"
                                  requiredMessage="Please enter dog name! "/>
-                    <p:outputLabel for="owner" value="ID of Owner: "/>
-                    <p:inputText id="owner" size="40"
-                                 value="#{dogController.dogDTO.dogOwner.id}" required="true"
-                                 requiredMessage="Please enter dog owner! "/>
+                    <p:outputLabel for="owner" value="Country: "/>
+                    <p:selectOneMenu id="owner" value="#{dogController.dogDTO.dogOwner.id}" style="width:150px">
+                        <f:selectItem itemLabel="Select Owner ID" itemValue="" noSelectionOption="true"/>
+                        <f:selectItems value="#{ownerController.convertOwnersToNames(ownerController.owners)}"/>
+                    </p:selectOneMenu>
 
                     <p:commandButton value="#{dogController.actionLabel}"
                                      action="#{dogController.saveDog()}" update="dogList dogInfoPnl">
